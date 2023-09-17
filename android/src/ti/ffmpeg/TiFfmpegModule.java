@@ -7,9 +7,9 @@
  */
 package ti.ffmpeg;
 
-import com.arthenica.ffmpegkit.ExecuteCallback;
 import com.arthenica.ffmpegkit.FFmpegKit;
 import com.arthenica.ffmpegkit.FFmpegSession;
+import com.arthenica.ffmpegkit.FFmpegSessionCompleteCallback;
 import com.arthenica.ffmpegkit.FFprobeKit;
 import com.arthenica.ffmpegkit.LogCallback;
 import com.arthenica.ffmpegkit.MediaInformationSession;
@@ -60,10 +60,9 @@ public class TiFfmpegModule extends KrollModule {
         final KrollFunction callbackError = (KrollFunction) properties.get("error");
 
         if (file != null && file_out != null) {
-            FFmpegSession session = FFmpegKit.executeAsync("-i " + file.nativePath() + " " + waterMark + " " + options + " " + file_out.nativePath(), new ExecuteCallback() {
-
+            FFmpegSession session = FFmpegKit.executeAsync("-i " + file.nativePath() + " " + waterMark + " " + options + " " + file_out.nativePath(), new FFmpegSessionCompleteCallback() {
                 @Override
-                public void apply(Session session) {
+                public void apply(FFmpegSession session) {
                     SessionState state = session.getState();
                     ReturnCode returnCode = session.getReturnCode();
 

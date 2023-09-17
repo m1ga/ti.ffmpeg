@@ -1,14 +1,6 @@
 # Titanium FFMPEG module for Android
 
-## Installation
-
-add
-```
-repositories {
-	maven { url 'https://jitpack.io' }
-}
-```
-to `app/platform/android/build.gradle`
+Using https://github.com/arthenica/ffmpeg-kit (min version)
 
 ## Example
 ```js

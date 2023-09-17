@@ -1,7 +1,3 @@
-repositories {
-	maven { url 'https://jitpack.io' }
-}
-
 dependencies {
-	implementation 'com.arthenica:ffmpeg-kit-min-gpl:4.5.LTS'
+	implementation 'com.arthenica:ffmpeg-kit-min-gpl:6.0-2.LTS'
 }
