@@ -19,15 +19,13 @@ var file_watermark = Ti.Filesystem.getFile(Ti.Filesystem.applicationDataDirector
 ffmpeg.run({
 	input: file,
 	output: file_out,
-  watermark: file_watermark,
+	watermark: file_watermark,
 	options: "-y -b:v 5M -preset ultrafast -g 1 -filter_complex '[0]scale=512:-1' -an",
 	success: function(e) {
 		// e.file
 		// e.duration
 	},
-	error: function(e) {
-    //
-	}
+	error: function(e) {}
 })
 ```
 
