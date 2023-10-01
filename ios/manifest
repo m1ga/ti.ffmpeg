@@ -1,0 +1,19 @@
+#
+# this is your module manifest and used by Titanium
+# during compilation, packaging, distribution, etc.
+#
+version: 1.0.0
+apiversion: 2
+architectures: arm64 x86_64
+mac: true
+description: ti.ffmpeg
+author: Christian Clare
+license: MIT
+copyright: Copyright (c) 2023 by Tambit Software LLC
+
+# these should not be edited
+name: ti.ffmpeg
+moduleid: ti.ffmpeg
+guid: eb17ed6a-9cbe-433f-bc93-16cc91810514
+platform: iphone
+minsdk: 12.0.0
