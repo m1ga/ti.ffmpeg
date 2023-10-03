@@ -1,6 +1,16 @@
-# Titanium FFMPEG module for Android
+# Titanium FFMPEG module for Android and iOS
 
-Using https://github.com/arthenica/ffmpeg-kit (min version)
+<img src="intro.jpg" alt="example app"/>
+
+
+This module allows you to run ffmpeg commands inside your Titanium SDK app. It is using https://github.com/arthenica/ffmpeg-kit "min version".
+
+You can convert video files, add watermarks, cut and merge clips and much more.
+
+## Methods
+
+* info()
+* run()
 
 ## Example
 ```js
@@ -29,8 +39,13 @@ ffmpeg.run({
 })
 ```
 
+also check `example/app.js` for another example app.
+
 ## Author
 
-- Michael Gangolf ([@MichaelGangolf](https://twitter.com/MichaelGangolf) / [Web](http://migaweb.de))
+- Android: Michael Gangolf ([@MichaelGangolf](https://twitter.com/MichaelGangolf) / [Web](http://migaweb.de)) <span class="badge-buymeacoffee"><a href="https://www.buymeacoffee.com/miga" title="donate"><img src="https://img.shields.io/badge/buy%20me%20a%20coke-donate-orange.svg" alt="Buy Me A Coke donate button" /></a></span>
+- iOS: Christian Clare ([@narbs](https://github.com/narbs) / [Tambit Software LLC](https://www.groundhum.com/portfolio))
 
-<span class="badge-buymeacoffee"><a href="https://www.buymeacoffee.com/miga" title="donate"><img src="https://img.shields.io/badge/buy%20me%20a%20coke-donate-orange.svg" alt="Buy Me A Coke donate button" /></a></span>
+## Need an Titanium iOS module?
+
+Get it contact with Christian Clare ([@narbs](https://github.com/narbs) / [Tambit Software LLC](https://www.groundhum.com/portfolio)). He offers Titanium iOS module development as well as native iOS development.
