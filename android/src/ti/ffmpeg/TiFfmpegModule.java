@@ -14,7 +14,6 @@ import com.arthenica.ffmpegkit.FFprobeKit;
 import com.arthenica.ffmpegkit.LogCallback;
 import com.arthenica.ffmpegkit.MediaInformationSession;
 import com.arthenica.ffmpegkit.ReturnCode;
-import com.arthenica.ffmpegkit.Session;
 import com.arthenica.ffmpegkit.SessionState;
 import com.arthenica.ffmpegkit.Statistics;
 import com.arthenica.ffmpegkit.StatisticsCallback;
@@ -35,7 +34,8 @@ public class TiFfmpegModule extends KrollModule {
 
     private static final String LCAT = "TiFfmpegModule";
     private KrollFunction callbackSuccess;
-
+    TiBaseFile file_out = null;
+    
     public TiFfmpegModule() {
         super();
     }
@@ -48,7 +48,11 @@ public class TiFfmpegModule extends KrollModule {
     @Kroll.method
     public void run(KrollDict properties) throws IOException {
         TiBaseFile file = ((TiFileProxy) properties.get("input")).getBaseFile();
-        final TiBaseFile file_out = ((TiFileProxy) properties.get("output")).getBaseFile();
+
+
+        if (properties.containsKeyAndNotNull("output")) {
+            file_out = ((TiFileProxy) properties.get("output")).getBaseFile();
+        }
         TiBaseFile file_watermark;
         String waterMark = "";
         if (properties.containsKeyAndNotNull("watermark")) {
@@ -59,8 +63,13 @@ public class TiFfmpegModule extends KrollModule {
         callbackSuccess = (KrollFunction) properties.get("success");
         final KrollFunction callbackError = (KrollFunction) properties.get("error");
 
-        if (file != null && file_out != null) {
-            FFmpegSession session = FFmpegKit.executeAsync("-i " + file.nativePath() + " " + waterMark + " " + options + " " + file_out.nativePath(), new FFmpegSessionCompleteCallback() {
+        if (file != null) {
+            String outputFile = "";
+            if (file_out != null) {
+                outputFile = file_out.nativePath();
+            }
+
+            FFmpegSession session = FFmpegKit.executeAsync("-i " + file.nativePath() + " " + waterMark + " " + options + " " + outputFile, new FFmpegSessionCompleteCallback() {
                 @Override
                 public void apply(FFmpegSession session) {
                     SessionState state = session.getState();
@@ -71,7 +80,9 @@ public class TiFfmpegModule extends KrollModule {
                         MediaInformationSession infoSession = FFprobeKit.getMediaInformation(file_out.nativePath());
                         String duration = infoSession.getMediaInformation().getDuration();
                         KrollDict kd = new KrollDict();
+                        if (file_out != null) {
                         kd.put("file", file_out.nativePath());
+                        }
                         kd.put("duration", duration);
                         kd.put("filesize", infoSession.getMediaInformation().getSize());
                         kd.put("width", infoSession.getMediaInformation().getStreams().get(0).getWidth());

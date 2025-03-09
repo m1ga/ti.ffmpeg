@@ -2,7 +2,7 @@
 # this is your module manifest and used by Titanium
 # during compilation, packaging, distribution, etc.
 #
-version: 1.1.0
+version: 1.2.0
 apiversion: 4
 architectures: arm64-v8a armeabi-v7a x86 x86_64
 description: ti.ffmpeg
@@ -15,4 +15,4 @@ name: ti.ffmpeg
 moduleid: ti.ffmpeg
 guid: 31824953-4320-4eb6-9a5b-a188fb139a06
 platform: android
-minsdk: 9.0.0
+minsdk: 12.6.0
