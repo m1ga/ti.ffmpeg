@@ -1,3 +1,8 @@
+# ⚠️ Android module not working anymore ⚠️
+Please read: https://tanersener.medium.com/saying-goodbye-to-ffmpegkit-33ae939767e1
+The authoer of the library has archived the project and removed all binaries. At the moment you can't build a Titanium Android version using my module. I'll search for an alternative.
+
+
 # Titanium FFMPEG module for Android and iOS
 
 <img src="intro.jpg" alt="example app"/>
