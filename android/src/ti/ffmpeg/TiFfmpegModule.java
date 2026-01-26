@@ -7,16 +7,16 @@
  */
 package ti.ffmpeg;
 
-import com.arthenica.ffmpegkit.FFmpegKit;
-import com.arthenica.ffmpegkit.FFmpegSession;
-import com.arthenica.ffmpegkit.FFmpegSessionCompleteCallback;
-import com.arthenica.ffmpegkit.FFprobeKit;
-import com.arthenica.ffmpegkit.LogCallback;
-import com.arthenica.ffmpegkit.MediaInformationSession;
-import com.arthenica.ffmpegkit.ReturnCode;
-import com.arthenica.ffmpegkit.SessionState;
-import com.arthenica.ffmpegkit.Statistics;
-import com.arthenica.ffmpegkit.StatisticsCallback;
+import com.antonkarpenko.ffmpegkit.FFmpegKit;
+import com.antonkarpenko.ffmpegkit.FFmpegSession;
+import com.antonkarpenko.ffmpegkit.FFmpegSessionCompleteCallback;
+import com.antonkarpenko.ffmpegkit.FFprobeKit;
+import com.antonkarpenko.ffmpegkit.LogCallback;
+import com.antonkarpenko.ffmpegkit.MediaInformationSession;
+import com.antonkarpenko.ffmpegkit.ReturnCode;
+import com.antonkarpenko.ffmpegkit.SessionState;
+import com.antonkarpenko.ffmpegkit.Statistics;
+import com.antonkarpenko.ffmpegkit.StatisticsCallback;
 
 import org.appcelerator.kroll.KrollDict;
 import org.appcelerator.kroll.KrollFunction;
@@ -33,9 +33,9 @@ import java.io.IOException;
 public class TiFfmpegModule extends KrollModule {
 
     private static final String LCAT = "TiFfmpegModule";
-    private KrollFunction callbackSuccess;
     TiBaseFile file_out = null;
-    
+    private KrollFunction callbackSuccess;
+
     public TiFfmpegModule() {
         super();
     }
@@ -48,7 +48,6 @@ public class TiFfmpegModule extends KrollModule {
     @Kroll.method
     public void run(KrollDict properties) throws IOException {
         TiBaseFile file = ((TiFileProxy) properties.get("input")).getBaseFile();
-
 
         if (properties.containsKeyAndNotNull("output")) {
             file_out = ((TiFileProxy) properties.get("output")).getBaseFile();
@@ -81,7 +80,7 @@ public class TiFfmpegModule extends KrollModule {
                         String duration = infoSession.getMediaInformation().getDuration();
                         KrollDict kd = new KrollDict();
                         if (file_out != null) {
-                        kd.put("file", file_out.nativePath());
+                            kd.put("file", file_out.nativePath());
                         }
                         kd.put("duration", duration);
                         kd.put("filesize", infoSession.getMediaInformation().getSize());
@@ -94,14 +93,15 @@ public class TiFfmpegModule extends KrollModule {
                         // error
                         KrollDict kd = new KrollDict();
                         kd.put("error", session.getFailStackTrace());
+                        kd.put("log", session.toString());
                         callbackError.call(krollObject, kd);
                     }
                     Log.w(LCAT, String.format("FFmpeg process exited with state %s and rc %s.%s", state, returnCode, session.getFailStackTrace()));
                 }
             }, new LogCallback() {
                 @Override
-                public void apply(com.arthenica.ffmpegkit.Log log) {
-                    // CALLED WHEN SESSION PRINTS LOGS
+                public void apply(com.antonkarpenko.ffmpegkit.Log log) {
+
                 }
             }, new StatisticsCallback() {
                 @Override
